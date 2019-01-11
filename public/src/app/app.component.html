@@ -1,25 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <main id='grid_container' *ngIf="loggedIn">
 
-  <div>
-      <h1>
-        Restful Tasks API!
-      </h1>
-      
-      <h2>All the tasks:</h2>
-      <ul>
-        <li *ngFor="let task of tasks">
-          {{ task.title }}
-          <ul>
-            <li>{{ task.description }}</li>
-          </ul>
-        </li>
-        
-      </ul>
-      <h2>Second Task</h2>
-        <ul>
-          <li>{{ tasks[1].title }}</li>
-        </ul>
-    </div>
-    </main>
+  <h1 id="title">
+    Restful Tasks API!
+  </h1>
 
+  <button id="getBtn" class="btn btn-info" (click)="onButtonClick($event)">GET ALL TASKS</button>
+  <section id="task" *ngFor="let task of tasks">
+    <section id="allTasks" *ngIf="show">
+      <span id="taskTitle">{{ task.title }}</span>
+      <button id="showBtn" (click)="getTaskDetails(task._id)">Show</button>
+    </section>
+  </section>
+
+  <section id="taskDetails" *ngIf="showDetails">
+    <p id='sTitle'>{{ singleTask.title }}</p>
+
+    <p>{{ singleTask.description }}</p>
+    <button class="btn btn-primary" (click)="complete()">Complete</button>
+  </section>
+
+</main>

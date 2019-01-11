@@ -11,4 +11,13 @@ export class HttpService {
   getTask(){
     return this._http.get("/api/tasks");
   }
+
+  getSingleTask(taskId){
+    return this._http.get(`/api/${taskId}`);
+  }
+
+  postTask(formData){
+   return this._http.post('/new', formData);
+  }
+
 }
