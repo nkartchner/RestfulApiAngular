@@ -1,0 +1,25 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<main id='grid_container' *ngIf="loggedIn">
+
+  <div>
+      <h1>
+        Restful Tasks API!
+      </h1>
+      
+      <h2>All the tasks:</h2>
+      <ul>
+        <li *ngFor="let task of tasks">
+          {{ task.title }}
+          <ul>
+            <li>{{ task.description }}</li>
+          </ul>
+        </li>
+        
+      </ul>
+      <h2>Second Task</h2>
+        <ul>
+          <li>{{ tasks[1].title }}</li>
+        </ul>
+    </div>
+    </main>
+
