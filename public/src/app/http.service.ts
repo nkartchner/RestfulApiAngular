@@ -6,18 +6,29 @@ import { HttpClient } from '@angular/common/http';
 
 export class HttpService {
 
-  constructor( private _http: HttpClient ) {};
+  constructor(private _http: HttpClient) { };
 
-  getTask(){
+  getTask() {
     return this._http.get("/api/tasks");
   }
 
-  getSingleTask(taskId){
+  getSingleTask(taskId) {
     return this._http.get(`/api/${taskId}`);
   }
 
-  postTask(formData){
-   return this._http.post('/new', formData);
+  newTask(newTask) {
+    return this._http.post('/api/new', newTask);
+  }
+
+  updateTask(taskId, taskData){
+    console.log('Hit the Services');
+    
+    console.log(taskData);
+    return this._http.put(`/api/update/${taskId}`,taskData);
+  }
+
+  deleteTask(taskId){
+    return this._http.delete(`/api/remove/${taskId}`);
   }
 
 }

@@ -1,23 +1,51 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <main id='grid_container' *ngIf="loggedIn">
 
-  <h1 id="title">
-    Restful Tasks API!
-  </h1>
-
-  <button id="getBtn" class="btn btn-info" (click)="onButtonClick($event)">GET ALL TASKS</button>
-  <section id="task" *ngFor="let task of tasks">
-    <section id="allTasks" *ngIf="show">
+  <h1 id="title">Restful Tasks API!</h1>
+  <button id="getBtn" class="btn btn-info" (click)="toggleCreateForm()">Create New Task</button>
+  <section id="task" *ngFor="let task of tasks; index as i">
+    <section id="allTasks">
       <span id="taskTitle">{{ task.title }}</span>
-      <button id="showBtn" (click)="getTaskDetails(task._id)">Show</button>
+      <button id="showBtn" [ngClass]="{complete:task.completed, incomplete:!task.completed}" (click)="Details(task._id, i)">Show</button>
     </section>
   </section>
+
+<!-------------------------------------------------------- LIST OF TASKS --------------------------------------------------------->
 
   <section id="taskDetails" *ngIf="showDetails">
     <p id='sTitle'>{{ singleTask.title }}</p>
 
     <p>{{ singleTask.description }}</p>
-    <button class="btn btn-primary" (click)="complete()">Complete</button>
+    <button id="completeBtn" class="btn btn-primary" (click)="edit()">Edit</button>
+    <button id="deleteBtn" class="btn btn-danger" (click)="delete(singleTask._id)">Delete</button>
   </section>
+
+
+<!-------------------------------------------------- EDIT FORM --------------------------------------------------->
+<form id="taskEditForm" (submit)="submitEdit()" *ngIf="editForm">
+        <label for="singleTask.title">Title:</label>
+        <input class="form-control" type="text" name="singleTask.title" [(ngModel)]="singleTask.title" [value]="singleTask.title" >
+        
+        <label for="singleTask.title">Description:</label>
+        <input class="form-control" type="text" name="singleTask.description" [(ngModel)]="singleTask.description"  [value]="singleTask.description">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1" name="singleTask.completed" [(ngModel)]="singleTask.completed" [checked]="singleTask.completed">
+            <label class="custom-control-label" for="customCheck1" >Complete</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      
+<!-------------------------------------------------- CREATE NEW FORM --------------------------------------------------->
+  <form id="taskForm" (submit)="submitNewTask()" *ngIf="newForm">
+    <label for="newtask.title">Title:</label>
+    <input class="form-control" type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+    
+    <label for="newtask.title">Description:</label>
+    <input class="form-control" type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+    <button id="createbtn" type="submit" class="btn btn-primary">Create Task</button>
+  </form>
+
+
 
 </main>
