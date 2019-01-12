@@ -21,9 +21,6 @@ export class HttpService {
   }
 
   updateTask(taskId, taskData){
-    console.log('Hit the Services');
-    
-    console.log(taskData);
     return this._http.put(`/api/update/${taskId}`,taskData);
   }
 

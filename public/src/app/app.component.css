@@ -84,7 +84,7 @@
     padding:10px;
 }
 
-#completeBtn{
+/* #completeBtn{
     justify-self: center;
     align-self: center;
     margin-right:30px;
@@ -94,11 +94,11 @@
     justify-self: center;
     align-self: center;
     margin-left:30px;
-}
+} */
 
-#sTitle{
+/* #sTitle{
     font-size:25px;
-}
+} */
 
 #taskForm{
     width:600px;

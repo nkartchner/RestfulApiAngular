@@ -1,0 +1,6 @@
+
+  <p id='sTitle'>{{ singleTask.title }}</p>
+
+  <p>{{ singleTask.description }}</p>
+  <button id="completeBtn" class="btn btn-primary" (click)="edit()">Edit</button>
+  <button id="deleteBtn" class="btn btn-danger" (click)="delete(singleTask._id)">Delete</button>

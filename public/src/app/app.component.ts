@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskComponent as Task } from './task/task.component';
 import { HttpService } from './http.service'
 import { observable } from 'rxjs';
 
@@ -38,6 +39,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+    ToggleEditForm(event){
+      console.log(event);
+      this.edit();
+    }
 
   submitEdit() {
     console.log('submiting edit');
@@ -53,7 +58,7 @@ export class AppComponent implements OnInit {
       console.log("DID IT WORK?");
     });
     this.showDetails = false;
-    this.edit();
+    this.editForm = false;
     
   }
 
@@ -71,6 +76,7 @@ export class AppComponent implements OnInit {
     this.newForm = !this.newForm;
     this.newTask = { title: "", description: "" }
   }
+
   toggleCreateForm() {
     this.editForm = false;
     this.showDetails = false;
@@ -78,20 +84,26 @@ export class AppComponent implements OnInit {
   }
 
 
-  Details(taskid: string, index: number) {
+  Details(task: any, index: number) {
+    this.showDetails = true;
     this.editForm = false;
-    let observable = this._httpService.getSingleTask(taskid);
-    observable.subscribe(task => {
-      this.singleTask = task['data'][0];
-      this.showDetails = true;
-    });
+    console.log(task);     
     this.index = index;
+    this.singleTask = task;
+    this.showDetails = true;
+    
+    // let observable = this._httpService.getSingleTask(task._id);
+    // observable.subscribe(task => {
+    //   this.index = index;
+    //   this.singleTask = task['data'][0];
+    //   this.showDetails = true;
+    // });
   }
 
   delete(taskID: string) {
-    this.editForm = false;
     return this._httpService.deleteTask(taskID).subscribe(data => {
-      this.tasks.splice(this.index);
+      this.editForm = false;
+      this.showDetails = false;
     });
   }
 }

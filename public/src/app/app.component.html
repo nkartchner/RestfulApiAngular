@@ -6,18 +6,22 @@
   <section id="task" *ngFor="let task of tasks; index as i">
     <section id="allTasks">
       <span id="taskTitle">{{ task.title }}</span>
-      <button id="showBtn" [ngClass]="{complete:task.completed, incomplete:!task.completed}" (click)="Details(task._id, i)">Show</button>
+      <button id="showBtn" [ngClass]="{complete:task.completed, incomplete:!task.completed}" (click)="Details(task, i)">Show</button>
     </section>
   </section>
 
 <!-------------------------------------------------------- LIST OF TASKS --------------------------------------------------------->
 
-  <section id="taskDetails" *ngIf="showDetails">
+  <!-- <section id="taskDetails" *ngIf="showDetails">
     <p id='sTitle'>{{ singleTask.title }}</p>
 
     <p>{{ singleTask.description }}</p>
     <button id="completeBtn" class="btn btn-primary" (click)="edit()">Edit</button>
     <button id="deleteBtn" class="btn btn-danger" (click)="delete(singleTask._id)">Delete</button>
+  </section> -->
+  <section id="taskDetails" *ngIf="showDetails">
+
+    <app-task *ngIf="singleTask" [singleTask]="singleTask" (event)='ToggleEditForm($event)'></app-task>
   </section>
 
 
